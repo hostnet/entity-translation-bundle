@@ -1,0 +1,5 @@
+services:
+    hostnet_entity_translation.enum.loader:
+        class : Hostnet\Bundle\EntityTranslationBundle\Loader\EnumLoader
+        arguments:
+            - "@translation.loader.yml"
