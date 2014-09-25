@@ -1,0 +1,8 @@
+hostnet:
+    bundle:
+        entity_translation_bundle:
+            mock:
+                # Hostnet\Bundle\EntityTranslationBundle\Mock\MockEnum enum translations
+                mock_enum:
+                    foo : "Foo"
+                    bar : "Not so Bar"
