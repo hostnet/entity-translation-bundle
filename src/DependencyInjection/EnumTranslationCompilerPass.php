@@ -54,7 +54,7 @@ class EnumTranslationCompilerPass implements CompilerPassInterface
                 throw new \RuntimeException(sprintf("Unsupported enum translation file format '%s'.", $format));
             }
 
-            $translations = Yaml::parse($file);
+            $translations = Yaml::parse(file_get_contents($file));
 
             if (!is_array($translations)) {
                 throw new \RuntimeException(sprintf(

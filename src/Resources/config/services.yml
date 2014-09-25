@@ -3,3 +3,5 @@ services:
         class : Hostnet\Bundle\EntityTranslationBundle\Loader\EnumLoader
         arguments:
             - "@translation.loader.yml"
+        tags:
+            - { name: translation.loader, alias: enum }
