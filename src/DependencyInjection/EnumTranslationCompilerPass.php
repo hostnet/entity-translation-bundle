@@ -43,7 +43,7 @@ class EnumTranslationCompilerPass implements CompilerPassInterface
      * @param ContainerBuilder $container
      * @param array $enum_files
      */
-    private function registerEnums(ContainerBuilder $container, array $enum_files)
+    protected function registerEnums(ContainerBuilder $container, array $enum_files)
     {
         $translator = $container->getDefinition('translator.default');
 
