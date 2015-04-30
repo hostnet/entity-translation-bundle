@@ -15,9 +15,13 @@ class EnumTranslationCompilerPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        foreach ($container->getParameter('kernel.bundles') as $class) {
-            $reflection = new \ReflectionClass($class);
-            if (!is_dir($dir = dirname($reflection->getFilename()) . '/Resources/translations')) {
+        foreach ($container->getParameter('kernel.bundles') as $name => $class) {
+            // Special case when using the EntityBundle
+            $base_dir = ($class === 'Hostnet\Bundle\EntityBundle\HostnetEntityBundle')
+                ? $container->getParameter(sprintf('hostnet.entity.%s.path', $container->underscore($name)))
+                : dirname((new \ReflectionClass($class))->getFilename());
+
+            if (!is_dir($dir = $base_dir . '/Resources/translations')) {
                 continue;
             }
 
