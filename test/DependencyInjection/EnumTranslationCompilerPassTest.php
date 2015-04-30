@@ -1,12 +1,12 @@
 <?php
 namespace Hostnet\Bundle\EntityTranslationBundle\DependencyInjection;
 
-use Hostnet\Bundle\EntityTranslationBundle\Mock\MockEnum;
+use Hostnet\Bundle\EntityTranslationBundle\MockNoArray\MockNoArray;
 use Hostnet\Bundle\EntityTranslationBundle\MockNoTrans\MockNoTransEnum;
 use Hostnet\Bundle\EntityTranslationBundle\MockXml\MockXmlEnum;
+use Hostnet\Bundle\EntityTranslationBundle\Mock\MockEnum;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
-use Hostnet\Bundle\EntityTranslationBundle\MockNoArray\MockNoArray;
 
 /**
  * @covers Hostnet\Bundle\EntityTranslationBundle\DependencyInjection\EnumTranslationCompilerPass
@@ -17,6 +17,35 @@ class EnumTranslationCompilerPassTest extends \PHPUnit_Framework_TestCase
     {
         $container = new ContainerBuilder();
         $container->setParameter('kernel.bundles', ["Mock" => MockEnum::class]);
+
+        $translator = new Definition();
+        $container->setDefinition('translator.default', $translator);
+
+        $pass = new EnumTranslationCompilerPass();
+        $pass->process($container);
+
+        $calls = $translator->getMethodCalls();
+
+        $this->assertEquals(1, count($calls));
+        $this->assertEquals(
+            [
+                "addResource",
+                [
+                    "enum",
+                    realpath(__DIR__ . "/../Mock/Resources/translations/enum.en.yml"),
+                    "en",
+                    MockEnum::class
+                ]
+            ],
+            $calls[0]
+        );
+    }
+
+    public function testProcessEntityBundle()
+    {
+        $container = new ContainerBuilder();
+        $container->setParameter('kernel.bundles', ["Mock" => 'Hostnet\Bundle\EntityBundle\HostnetEntityBundle']);
+        $container->setParameter('hostnet.entity.mock.path', realpath(__DIR__ . '/../Mock/'));
 
         $translator = new Definition();
         $container->setDefinition('translator.default', $translator);
