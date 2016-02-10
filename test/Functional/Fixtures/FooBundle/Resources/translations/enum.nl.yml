@@ -1,0 +1,10 @@
+hostnet:
+    bundle:
+        entity_translation_bundle:
+            functional:
+                fixtures:
+                    enum:
+                        post_status:
+                            awaiting_approval: Ik wacht op verwijdering
+                            visible: Ik ben zichtbaar
+                            deleted: Ik ben verwijderd

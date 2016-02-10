@@ -1,5 +1,4 @@
-/.project
-/.buildpath
-/.settings/
+/test/Functional/Fixtures/cache
+/test/Functional/Fixtures/logs
 /vendor/
 /composer.lock
