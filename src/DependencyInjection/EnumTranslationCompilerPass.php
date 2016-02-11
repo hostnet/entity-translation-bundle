@@ -11,21 +11,14 @@ use Symfony\Component\Yaml\Yaml;
 class EnumTranslationCompilerPass implements CompilerPassInterface
 {
     /**
-     * @see \Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface::process()
+     * {@inheritdoc}
      */
     public function process(ContainerBuilder $container)
     {
-        foreach ($container->getParameter('kernel.bundles') as $name => $class) {
-            // Special case when using the EntityBundle
-            $base_dir = ($class === 'Hostnet\Bundle\EntityBundle\HostnetEntityBundle')
-                ? $container->getParameter(sprintf('hostnet.entity.%s.path', $container->underscore($name)))
-                : dirname((new \ReflectionClass($class))->getFilename());
-
-            if (!is_dir($dir = $base_dir . '/Resources/translations')) {
-                continue;
-            }
-
-            $this->registerEnums($container, glob($dir . "/enum.*.*"));
+        foreach ($container->getDefinition('translator.default')->getArgument(3)['resource_files'] as $files) {
+            $this->registerEnums($container, array_filter($files, function ($file) {
+                return preg_match('~/enum\.[a-z]+\.[a-z]+$~', $file) === 1;
+            }));
         }
     }
 

@@ -13,7 +13,7 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 class HostnetEntityTranslationBundle extends Bundle
 {
     /**
-     * @see \Symfony\Component\HttpKernel\Bundle\Bundle::build()
+     * {@inheritdoc}
      */
     public function build(ContainerBuilder $container)
     {

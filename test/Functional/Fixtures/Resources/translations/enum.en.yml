@@ -1,0 +1,9 @@
+hostnet:
+    bundle:
+        entity_translation_bundle:
+            functional:
+                fixtures:
+                    enum:
+                        reply_status:
+                            open: open
+                            closed: closed

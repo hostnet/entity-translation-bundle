@@ -2,9 +2,15 @@
 namespace Hostnet\Bundle\EntityTranslationBundle\Functional;
 
 use Hostnet\Bundle\EntityTranslationBundle\Functional\Fixtures\Enum\PostStatus;
+use Hostnet\Bundle\EntityTranslationBundle\Functional\Fixtures\Enum\ReplyStatus;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Translation\TranslatorInterface;
 
+/**
+ * Tests if the FooBundle enum translations and app translations can be loaded.
+ *
+ * The Fixtures directory is considered the "app" directory as the kernel resides there.
+ */
 class EnumTranslationTest extends KernelTestCase
 {
     protected function setUp()
@@ -23,7 +29,7 @@ class EnumTranslationTest extends KernelTestCase
         self::assertSame($expected_translation, $translator->trans($key, [], $object_class, $locale));
     }
 
-    public function translationProvider()
+    public static function translationProvider()
     {
         return [
             [PostStatus::class, PostStatus::AWAITING_APPROVAL, 'I am awaiting approval', 'en'],
@@ -34,6 +40,16 @@ class EnumTranslationTest extends KernelTestCase
             [PostStatus::class, PostStatus::VISIBLE, 'Ik ben zichtbaar', 'nl'],
             [PostStatus::class, 'henk', 'henk', 'en'],
             [null, 'henk', 'henk', 'nl'],
+            [ReplyStatus::class, ReplyStatus::CLOSED, 'closed', 'en'],
+            [ReplyStatus::class, ReplyStatus::OPEN, 'open', 'en'],
         ];
+    }
+
+    public function testverifyDefaultAppMessages()
+    {
+        /* @var $translator TranslatorInterface */
+        $translator = static::$kernel->getContainer()->get('translator');
+
+        self::assertSame('correct', $translator->trans('to_verify_the_translations_are_loaded'));
     }
 }
