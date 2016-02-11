@@ -1,9 +1,6 @@
 <?php
 namespace Hostnet\Bundle\EntityTranslationBundle\DependencyInjection;
 
-use Hostnet\Bundle\EntityTranslationBundle\MockNoArray\MockNoArray;
-use Hostnet\Bundle\EntityTranslationBundle\MockNoTrans\MockNoTransEnum;
-use Hostnet\Bundle\EntityTranslationBundle\MockXml\MockXmlEnum;
 use Hostnet\Bundle\EntityTranslationBundle\Mock\MockEnum;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
@@ -15,10 +12,12 @@ class EnumTranslationCompilerPassTest extends \PHPUnit_Framework_TestCase
 {
     public function testProcess()
     {
-        $container = new ContainerBuilder();
-        $container->setParameter('kernel.bundles', ["Mock" => MockEnum::class]);
-
+        $resources  = realpath(__DIR__ . "/../Mock/Resources/translations/enum.en.yml");
+        $container  = new ContainerBuilder();
         $translator = new Definition();
+        $translator->setArguments([[], [], [], [
+            'resource_files' => ['en' => [$resources]]
+        ]]);
         $container->setDefinition('translator.default', $translator);
 
         $pass = new EnumTranslationCompilerPass();
@@ -27,47 +26,7 @@ class EnumTranslationCompilerPassTest extends \PHPUnit_Framework_TestCase
         $calls = $translator->getMethodCalls();
 
         $this->assertEquals(1, count($calls));
-        $this->assertEquals(
-            [
-                "addResource",
-                [
-                    "enum",
-                    realpath(__DIR__ . "/../Mock/Resources/translations/enum.en.yml"),
-                    "en",
-                    MockEnum::class
-                ]
-            ],
-            $calls[0]
-        );
-    }
-
-    public function testProcessEntityBundle()
-    {
-        $container = new ContainerBuilder();
-        $container->setParameter('kernel.bundles', ["Mock" => 'Hostnet\Bundle\EntityBundle\HostnetEntityBundle']);
-        $container->setParameter('hostnet.entity.mock.path', realpath(__DIR__ . '/../Mock/'));
-
-        $translator = new Definition();
-        $container->setDefinition('translator.default', $translator);
-
-        $pass = new EnumTranslationCompilerPass();
-        $pass->process($container);
-
-        $calls = $translator->getMethodCalls();
-
-        $this->assertEquals(1, count($calls));
-        $this->assertEquals(
-            [
-                "addResource",
-                [
-                    "enum",
-                    realpath(__DIR__ . "/../Mock/Resources/translations/enum.en.yml"),
-                    "en",
-                    MockEnum::class
-                ]
-            ],
-            $calls[0]
-        );
+        $this->assertEquals(["addResource", ["enum", $resources, "en", MockEnum::class]], $calls[0]);
     }
 
     /**
@@ -75,10 +34,13 @@ class EnumTranslationCompilerPassTest extends \PHPUnit_Framework_TestCase
      */
     public function testProcessNotYml()
     {
-        $container = new ContainerBuilder();
-        $container->setParameter('kernel.bundles', ["MockXml" => MockXmlEnum::class]);
-
+        $resources  = realpath(__DIR__ . "/../MockXml/Resources/translations/enum.en.xml");
+        $container  = new ContainerBuilder();
         $translator = new Definition();
+        $translator->setArguments([[], [], [], [
+            'resource_files' => ['en' => [$resources]]
+        ]]);
+
         $container->setDefinition('translator.default', $translator);
 
         $pass = new EnumTranslationCompilerPass();
@@ -87,10 +49,12 @@ class EnumTranslationCompilerPassTest extends \PHPUnit_Framework_TestCase
 
     public function testProcessNoTrans()
     {
-        $container = new ContainerBuilder();
-        $container->setParameter('kernel.bundles', ["Mock" => MockNoTransEnum::class]);
-
+        $container  = new ContainerBuilder();
         $translator = new Definition();
+        $translator->setArguments([[], [], [], [
+            'resource_files' => ['en' => []]
+        ]]);
+
         $container->setDefinition('translator.default', $translator);
 
         $pass = new EnumTranslationCompilerPass();
@@ -106,10 +70,13 @@ class EnumTranslationCompilerPassTest extends \PHPUnit_Framework_TestCase
      */
     public function testProcessNoArray()
     {
-        $container = new ContainerBuilder();
-        $container->setParameter('kernel.bundles', ["MockNoArray" => MockNoArray::class]);
-
+        $resources  = realpath(__DIR__ . "/../MockNoArray/Resources/translations/enum.en.yml");
+        $container  = new ContainerBuilder();
         $translator = new Definition();
+        $translator->setArguments([[], [], [], [
+            'resource_files' => ['en' => [$resources]]
+        ]]);
+
         $container->setDefinition('translator.default', $translator);
 
         $pass = new EnumTranslationCompilerPass();

@@ -24,7 +24,7 @@ class EnumLoader implements LoaderInterface
     }
 
     /**
-     * @see \Symfony\Component\Translation\Loader\LoaderInterface::load()
+     * {@inheritdoc}
      */
     public function load($resource, $locale, $domain = 'messages')
     {
