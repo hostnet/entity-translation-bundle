@@ -1,0 +1,10 @@
+hostnet:
+    bundle:
+        entity_translation_bundle:
+            functional:
+                fixtures:
+                    enum:
+                        post_status:
+                            awaiting_approval: I am awaiting approval
+                            visible: I am visible
+                            deleted: I am deleted
