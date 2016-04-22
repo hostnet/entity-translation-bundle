@@ -42,11 +42,11 @@ class EnumLoader implements LoaderInterface
         // constant value as key and the translation as values, or the constant
         // name if no translation was found.
         foreach ($consts as $const => $value) {
-            $key = $this->getPrettyName($domain) . "." . strtolower($const);
-
             if (is_array($value)) {
                 continue;
             }
+
+            $key = $this->getPrettyName($domain) . "." . strtolower($const);
 
             $merged[(string) $value] = $translations->has($key) ? $translations->get($key) : strtolower($const);
         }
