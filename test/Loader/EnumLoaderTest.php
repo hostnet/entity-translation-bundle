@@ -26,12 +26,6 @@ class EnumLoaderTest extends \PHPUnit_Framework_TestCase
             "en",
             MockEnum::class
         );
-        $this->translator->addResource(
-            "enum",
-            __DIR__ . "/../MockArray/Resources/translations/enum.en.yml",
-            "en",
-            MockArrayEnum::class
-        );
     }
 
     public function testTranslation()
@@ -54,11 +48,17 @@ class EnumLoaderTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    /**
-     * @requires PHP 5.6
-     */
     public function testTranslationArray()
     {
+        if(defined('HHVM_VERSION'))   $this->markTestSkipped();
+
+        $this->translator->addResource(
+            "enum",
+            __DIR__ . "/../MockArray/Resources/translations/enum.en.yml",
+            "en",
+            MockArrayEnum::class
+        );
+
         $this->assertEquals(
             "Foo1",
             $this->translator->trans(MockArrayEnum::FOO, [], MockArrayEnum::class)
