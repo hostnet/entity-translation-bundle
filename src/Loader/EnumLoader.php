@@ -44,6 +44,10 @@ class EnumLoader implements LoaderInterface
         foreach ($consts as $const => $value) {
             $key = $this->getPrettyName($domain) . "." . strtolower($const);
 
+            if (is_array($value)) {
+                continue;
+            }
+
             $merged[(string) $value] = $translations->has($key) ? $translations->get($key) : strtolower($const);
         }
 
