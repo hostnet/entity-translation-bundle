@@ -2,6 +2,7 @@
 namespace Hostnet\Bundle\EntityTranslationBundle\Loader;
 
 use Hostnet\Bundle\EntityTranslationBundle\Mock\MockEnum;
+use Hostnet\Bundle\EntityTranslationBundle\MockArray\MockArrayEnum;
 use Symfony\Component\Translation\Loader\YamlFileLoader;
 use Symfony\Component\Translation\Translator;
 
@@ -25,6 +26,12 @@ class EnumLoaderTest extends \PHPUnit_Framework_TestCase
             "en",
             MockEnum::class
         );
+        $this->translator->addResource(
+            "enum",
+            __DIR__ . "/../MockArray/Resources/translations/enum.en.yml",
+            "en",
+            MockArrayEnum::class
+        );
     }
 
     public function testTranslation()
@@ -44,6 +51,21 @@ class EnumLoaderTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(
             "1",
             $this->translator->trans(MockEnum::FOO)
+        );
+    }
+
+    /**
+     * @requires PHP 5.6
+     */
+    public function testTranslationArray()
+    {
+        $this->assertEquals(
+            "Foo1",
+            $this->translator->trans(MockArrayEnum::FOO, [], MockArrayEnum::class)
+        );
+        $this->assertEquals(
+            "Bar2",
+            $this->translator->trans(MockArrayEnum::BAR, [], MockArrayEnum::class)
         );
     }
 
