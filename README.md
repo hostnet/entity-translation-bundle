@@ -9,7 +9,7 @@ $status_text = $translator->trans(SetupStatus::DONE, [], SetupStatus::class);
 ```
 Or in a twig template:
 ```twig
-{{ constant('Amce\\ExampleBundle\\Entity\\SetupStatus::DONE') | trans([], 'Amce\\ExampleBundle\\Entity\\SetupStatus') }}
+{{ constant('AppBundle\\Entity\\SetupStatus::DONE') | trans([], 'AppBundle\\Entity\\SetupStatus') }}
 ```
 
 Requirements
@@ -48,12 +48,12 @@ class AppKernel extends Kernel
 
 Usage
 ------------
-Simply add an `enum.en.yml` to the translations folder in the Resources folder of one of your bundles. This will contain the translations for a given enum. The translation keys are the fully qualified namespaces in lowercase and an `_` between CamelCase words. So for instance the enum `Amce\ExampleBundle\Entity\SetupStatus` would become `amce.example_bundle.entity.setup_status`.
+Simply add an `enum.en.yml` to the translations folder in the Resources folder of one of your bundles. This will contain the translations for a given enum. The translation keys are the fully qualified namespaces in lowercase and an `_` between CamelCase words. So for instance the enum `Amce\AppBundle\Entity\SetupStatus` would become `amce.app_bundle.entity.setup_status`.
 
 Consider the following class:
 ```php
 <?php
-namespace Amce\ExampleBundle\Entity;
+namespace Amce\AppBundle\Entity;
 
 final class SetupStatus
 {
@@ -63,10 +63,10 @@ final class SetupStatus
     const REVERTING_CHANGES = 4;
 }
 ```
-Your `ExampleBundle/Resources/translations/enum.en.yml` could look as followed:
+Your `AppBundle/Resources/translations/enum.en.yml` could look as followed:
 ```yaml
 amce:
-    example_bundle:
+    app_bundle:
         entity:
             setup_status:
                 pending           : Installation Pending.
