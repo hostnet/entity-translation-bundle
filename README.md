@@ -9,7 +9,7 @@ $status_text = $translator->trans(SetupStatus::DONE, [], SetupStatus::class);
 ```
 Or in a twig template:
 ```twig
-{{ obj.status | trans([], 'Amce\\ExampleBundle\\Entity\\SetupStatus') }}
+{{ constant('Amce\\ExampleBundle\\Entity\\SetupStatus::DONE') | trans([], 'Amce\\ExampleBundle\\Entity\\SetupStatus') }}
 ```
 
 Requirements
