@@ -23,10 +23,8 @@ Installing is pretty straightforward, this package is available on [packagist](h
 
 #### Example
 
-```javascript
-    "require" : {
-        "hostnet/entity-translation-bundle" : "dev-master"
-    }
+```
+$ composer require hostnet/entity-translation-bundle
 ```
 
 #### Register The Bundle in your AppKernel
