@@ -39,7 +39,8 @@ class AppKernel extends Kernel
     {
         $bundles = [
             // ...
-            new Hostnet\Bundle\EntityTranslationBundle\HostnetEntityTranslationBundle()
+            new AppBundle\AppBundle(),
+            new Hostnet\Bundle\EntityTranslationBundle\HostnetEntityTranslationBundle(),
             // ...
         ];
 
@@ -50,12 +51,12 @@ class AppKernel extends Kernel
 
 Usage
 ------------
-Simply add an `enum.en.yml` to the translations folder in the Resources folder of one of your bundles. This will contain the translations for a given enum. The translation keys are the fully qualified namespaces in lowercase and an `_` between CamelCase words. So for instance the enum `Amce\AppBundle\Entity\SetupStatus` would become `amce.app_bundle.entity.setup_status`.
+Simply add an `enum.en.yml` to the translations folder in the Resources folder of one of your bundles. This will contain the translations for a given enum. The translation keys are the fully qualified namespaces in lowercase and an `_` between CamelCase words. So for instance the enum `AppBundle\Entity\SetupStatus` would become `app_bundle.entity.setup_status`.
 
 Consider the following class:
 ```php
 <?php
-namespace Amce\AppBundle\Entity;
+namespace AppBundle\Entity;
 
 final class SetupStatus
 {
@@ -67,14 +68,13 @@ final class SetupStatus
 ```
 Your `AppBundle/Resources/translations/enum.en.yml` could look as followed:
 ```yaml
-amce:
-    app_bundle:
-        entity:
-            setup_status:
-                pending           : Installation Pending.
-                done              : Installation Complete.
-                error             : An error occured.
-                reverting_changes : Reverting changes.
+app_bundle:
+    entity:
+        setup_status:
+            pending           : Installation Pending.
+            done              : Installation Complete.
+            error             : An error occured.
+            reverting_changes : Reverting changes.
 ```
 
 The translator will then pick up all enum classes defined in your translation file.
