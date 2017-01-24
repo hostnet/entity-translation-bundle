@@ -76,7 +76,7 @@ class EnumTranslationCompilerPass implements CompilerPassInterface
 
             // register the found enums into the correct domain and locale
             foreach ($enums as $enum) {
-                $translator->addMethodCall('addResource', ["enum", $file, $locale, $enum]);
+                $translator->addMethodCall('addResource', ['enum', $file, $locale, $enum]);
             }
         }
     }
@@ -104,7 +104,6 @@ class EnumTranslationCompilerPass implements CompilerPassInterface
             foreach ($a as $sub_key => $sub_value) {
                 $b[$key . "." . $sub_key] = $sub_value;
             }
-
         }
         return $b;
     }

@@ -16,6 +16,13 @@ class EnumLoader implements LoaderInterface
     private $yml_loader;
 
     /**
+     * List of enum classes for which we've already defined default values.
+     *
+     * @var string[]
+     */
+    private $handled_enum_classes = [];
+
+    /**
      * @param YamlFileLoader $yml_loader
      */
     public function __construct(YamlFileLoader $yml_loader)
@@ -32,29 +39,53 @@ class EnumLoader implements LoaderInterface
             throw new \RuntimeException(sprintf("Could not load constants for a class '%s'.", $domain));
         }
 
-        $consts       = (new \ReflectionClass($domain))->getConstants();
+        $messages = [];
+        if (! in_array($domain, $this->handled_enum_classes)) {
+            $messages                     = $this->loadFromConstants($domain);
+            $this->handled_enum_classes[] = $domain;
+        }
+
         $translations = $this->yml_loader->load($resource, $locale);
-        $merged       = [];
 
-        // Merge the translations in the translation file with the contact values.
-        // So if we define a translation we will map that to the correct number
-        // in the MessageCatalogue. Meaning we will have an array with the
-        // constant value as key and the translation as values, or the constant
-        // name if no translation was found.
-        foreach ($consts as $const => $value) {
-            if (is_array($value)) {
-                continue;
-            }
-
+        foreach ($this->getStringConstants($domain) as $const => $value) {
             $key = $this->getPrettyName($domain) . "." . strtolower($const);
-
-            $merged[(string) $value] = $translations->has($key) ? $translations->get($key) : strtolower($const);
+            if ($translations->has($key)) {
+                $messages[(string)$value] = $translations->get($key);
+            }
         }
 
         $catalogue = new MessageCatalogue($locale);
-        $catalogue->add($merged, $domain);
+        $catalogue->add($messages, $domain);
 
         return $catalogue;
+    }
+
+    /**
+     * @param string $domain
+     * @return array
+     */
+    private function loadFromConstants($domain)
+    {
+        $messages = [];
+        foreach ($this->getStringConstants($domain) as $const => $value) {
+            $messages[(string) $value] = strtolower($const);
+        }
+        return $messages;
+    }
+
+    /**
+     * Get all the constants from the given class that are not arrays.
+     *
+     * @param string $domain
+     * @return array
+     */
+    private function getStringConstants($domain)
+    {
+        $consts = (new \ReflectionClass($domain))->getConstants();
+
+        return array_filter($consts, function ($element) {
+            return !is_array($element);
+        });
     }
 
     /**
