@@ -45,9 +45,9 @@ class EnumTranslationCompilerPass implements CompilerPassInterface
         $translator = $container->getDefinition('translator.default');
 
         foreach ($enum_files as $file) {
-            list(, $locale, $format) = explode(".", basename($file), 3);
+            list(, $locale, $format) = explode('.', basename($file), 3);
 
-            if (strtolower($format) !== "yml") {
+            if (strtolower($format) !== 'yml') {
                 throw new \RuntimeException(sprintf("Unsupported enum translation file format '%s'.", $format));
             }
 
@@ -102,7 +102,7 @@ class EnumTranslationCompilerPass implements CompilerPassInterface
             $a = $this->flattenKeys($value);
 
             foreach ($a as $sub_key => $sub_value) {
-                $b[$key . "." . $sub_key] = $sub_value;
+                $b[$key . '.' . $sub_key] = $sub_value;
             }
         }
         return $b;

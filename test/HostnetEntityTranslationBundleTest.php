@@ -5,7 +5,7 @@ use Hostnet\Bundle\EntityTranslationBundle\DependencyInjection\EnumTranslationCo
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
- * @covers Hostnet\Bundle\EntityTranslationBundle\HostnetEntityTranslationBundle
+ * @covers \Hostnet\Bundle\EntityTranslationBundle\HostnetEntityTranslationBundle
  * @author Yannick de Lange <ydelange@hostnet.nl>
  */
 class HostnetEntityTranslationBundleTest extends \PHPUnit_Framework_TestCase

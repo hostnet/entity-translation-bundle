@@ -12,7 +12,7 @@ class EnumTranslationCompilerPassTest extends \PHPUnit_Framework_TestCase
 {
     public function testProcess()
     {
-        $resources  = realpath(__DIR__ . "/../Mock/Resources/translations/enum.en.yml");
+        $resources  = realpath(__DIR__ . '/../Mock/Resources/translations/enum.en.yml');
         $container  = new ContainerBuilder();
         $translator = new Definition();
         $translator->setArguments([[], [], [], [
@@ -26,7 +26,7 @@ class EnumTranslationCompilerPassTest extends \PHPUnit_Framework_TestCase
         $calls = $translator->getMethodCalls();
 
         $this->assertEquals(1, count($calls));
-        $this->assertEquals(["addResource", ["enum", $resources, "en", MockEnum::class]], $calls[0]);
+        $this->assertEquals(['addResource', ['enum', $resources, 'en', MockEnum::class]], $calls[0]);
     }
 
     /**
@@ -34,7 +34,7 @@ class EnumTranslationCompilerPassTest extends \PHPUnit_Framework_TestCase
      */
     public function testProcessNotYml()
     {
-        $resources  = realpath(__DIR__ . "/../MockXml/Resources/translations/enum.en.xml");
+        $resources  = realpath(__DIR__ . '/../MockXml/Resources/translations/enum.en.xml');
         $container  = new ContainerBuilder();
         $translator = new Definition();
         $translator->setArguments([[], [], [], [
@@ -70,7 +70,7 @@ class EnumTranslationCompilerPassTest extends \PHPUnit_Framework_TestCase
      */
     public function testProcessNoArray()
     {
-        $resources  = realpath(__DIR__ . "/../MockNoArray/Resources/translations/enum.en.yml");
+        $resources  = realpath(__DIR__ . '/../MockNoArray/Resources/translations/enum.en.yml');
         $container  = new ContainerBuilder();
         $translator = new Definition();
         $translator->setArguments([[], [], [], [
