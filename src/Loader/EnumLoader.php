@@ -48,7 +48,7 @@ class EnumLoader implements LoaderInterface
         $translations = $this->yml_loader->load($resource, $locale);
 
         foreach ($this->getStringConstants($domain) as $const => $value) {
-            $key = $this->getPrettyName($domain) . "." . strtolower($const);
+            $key = $this->getPrettyName($domain) . '.' . strtolower($const);
             if ($translations->has($key)) {
                 $messages[(string)$value] = $translations->get($key);
             }
@@ -102,7 +102,7 @@ class EnumLoader implements LoaderInterface
         $class_name = implode('.', array_map('lcfirst', explode('\\', $class_name)));
 
         return strtolower(preg_replace_callback('/([A-Z]{1})/', function ($m) {
-            return "_" . $m[0];
+            return '_' . $m[0];
         }, $class_name));
     }
 }
