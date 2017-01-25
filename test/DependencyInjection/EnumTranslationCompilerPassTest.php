@@ -6,7 +6,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 
 /**
- * @covers Hostnet\Bundle\EntityTranslationBundle\DependencyInjection\EnumTranslationCompilerPass
+ * @covers \Hostnet\Bundle\EntityTranslationBundle\DependencyInjection\EnumTranslationCompilerPass
  */
 class EnumTranslationCompilerPassTest extends \PHPUnit_Framework_TestCase
 {

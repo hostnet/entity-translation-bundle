@@ -7,3 +7,6 @@ hostnet:
                         reply_status:
                             open: open
                             closed: closed
+                        post_status:
+                            hidden: "Hidden (vendor file)"
+                            visibile: "Visible (vendor file, is overridden)"

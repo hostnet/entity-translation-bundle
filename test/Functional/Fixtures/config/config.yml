@@ -1,4 +1,4 @@
 framework:
     secret: test
-    translator: ~
+    translator:
     test: true

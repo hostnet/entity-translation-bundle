@@ -38,6 +38,7 @@ class EnumTranslationTest extends KernelTestCase
             [PostStatus::class, PostStatus::DELETED, 'Ik ben verwijderd', 'nl'],
             [PostStatus::class, PostStatus::VISIBLE, 'I am visible', 'en'],
             [PostStatus::class, PostStatus::VISIBLE, 'Ik ben zichtbaar', 'nl'],
+            [PostStatus::class, PostStatus::HIDDEN, 'Hidden (vendor file)', 'en'],
             [PostStatus::class, 'henk', 'henk', 'en'],
             [null, 'henk', 'henk', 'nl'],
             [ReplyStatus::class, ReplyStatus::CLOSED, 'closed', 'en'],

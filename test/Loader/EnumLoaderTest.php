@@ -7,13 +7,13 @@ use Symfony\Component\Translation\Loader\YamlFileLoader;
 use Symfony\Component\Translation\Translator;
 
 /**
- * @covers Hostnet\Bundle\EntityTranslationBundle\Loader\EnumLoader
+ * @covers \Hostnet\Bundle\EntityTranslationBundle\Loader\EnumLoader
  */
 class EnumLoaderTest extends \PHPUnit_Framework_TestCase
 {
     private $translator;
 
-    public function setUp()
+    protected function setUp()
     {
         $yml_loader = new YamlFileLoader();
         $loader     = new EnumLoader($yml_loader);
@@ -50,7 +50,9 @@ class EnumLoaderTest extends \PHPUnit_Framework_TestCase
 
     public function testTranslationArray()
     {
-        if(defined('HHVM_VERSION'))   $this->markTestSkipped();
+        if (defined('HHVM_VERSION')) {
+            $this->markTestSkipped();
+        }
 
         $this->translator->addResource(
             "enum",
