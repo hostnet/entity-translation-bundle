@@ -15,7 +15,21 @@ class EnumTranslationCompilerPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        foreach ($container->getDefinition('translator.default')->getArgument(3)['resource_files'] as $files) {
+        $resource_files = null;
+
+        foreach ($container->getDefinition('translator.default')->getArguments() as $argument) {
+            if (!is_array($argument) || !isset($argument['resource_files'])) {
+                continue;
+            }
+
+            $resource_files = (array) $argument['resource_files'];
+        }
+
+        if (null === $resource_files) {
+            throw new \LogicException('Expected a translator argument to have an array with "resource_files".');
+        }
+
+        foreach ($resource_files as $files) {
             $this->registerEnums($container, array_filter($files, function ($file) {
                 return preg_match('~/enum\.[a-z]+\.[a-z]+$~', $file) === 1;
             }));
