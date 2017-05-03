@@ -4,7 +4,7 @@ sudo: false
 
 cache:
   directories:
-    - "$HOME/.composer/cache"
+    - "$HOME/.composer/cache/files"
 
 env:
   - COMPOSER_FLAGS="--prefer-stable"
@@ -19,6 +19,11 @@ matrix:
       env: COMPOSER_FLAGS="--prefer-lowest"
     - php: 7.0
       env: COMPOSER_FLAGS="" SYMFONY_VERSION="3.0.*"
+    - php: 7.1
+      env: COMPOSER_FLAGS="" SYMFONY_VERSION="dev-master"
+  allow_failures:
+    - php: 7.1
+      env: COMPOSER_FLAGS="" SYMFONY_VERSION="dev-master"
 
 before_install: if [[ "$SYMFONY_VERSION" != "" ]]; then composer require --no-update symfony/symfony:${SYMFONY_VERSION}; fi
 

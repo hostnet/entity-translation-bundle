@@ -10,10 +10,6 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  */
 class HostnetEntityTranslationBundleTest extends \PHPUnit_Framework_TestCase
 {
-    private $expected_services = [
-        'hostnet_entity_translation.enum.loader'
-    ];
-
     public function testBuild()
     {
         $container = new ContainerBuilder();
@@ -21,15 +17,18 @@ class HostnetEntityTranslationBundleTest extends \PHPUnit_Framework_TestCase
         $bundle = new HostnetEntityTranslationBundle();
         $bundle->build($container);
 
-        $definitions = array_keys($container->getDefinitions());
-        $this->assertEquals(count($this->expected_services), count($definitions));
+        $this->assertArrayHasKey('hostnet_entity_translation.enum.loader', $container->getDefinitions());
 
-        foreach ($this->expected_services as $service) {
-            $this->assertContains($service, $definitions);
+        $found = false;
+
+        foreach ($container->getCompilerPassConfig()->getBeforeOptimizationPasses() as $pass) {
+            if (!$pass instanceof EnumTranslationCompilerPass) {
+                continue;
+            }
+
+            $found = true;
         }
 
-        $passes = $container->getCompilerPassConfig()->getBeforeOptimizationPasses();
-        $this->assertEquals(1, count($passes));
-        $this->assertInstanceOf(EnumTranslationCompilerPass::class, $passes[0]);
+        $this->assertTrue($found, 'Expected to find an optimization pass instance of the EnumTranslationCompilerPass');
     }
 }
