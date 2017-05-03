@@ -76,3 +76,8 @@ app_bundle:
 ```
 
 The translator will then pick up all enum classes defined in your translation file.
+
+Example implementation:
+```twig
+{{ constant('Amce\\ExampleBundle\\Entity::DONE') | trans([], 'Amce\\ExampleBundle\\Entity') }} {# Resulting in 'Installation Complete.', if set to English. #}
+```
