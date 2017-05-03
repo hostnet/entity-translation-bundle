@@ -2,6 +2,7 @@
     "name":        "hostnet/entity-translation-bundle",
     "description": "Translation bundle to help with rendering pretty names for enum-like classes.",
     "license":     "MIT",
+    "type":        "symfony-bundle",
     "require": {
         "php":                          "^7.0|^5.6",
         "doctrine/annotations":         "^1.3",
