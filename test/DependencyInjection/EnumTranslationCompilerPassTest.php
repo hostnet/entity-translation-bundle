@@ -10,6 +10,34 @@ use Symfony\Component\DependencyInjection\Definition;
  */
 class EnumTranslationCompilerPassTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @dataProvider processLoadYamlFilesProvider
+     */
+    public function testProcessLoadYamlFiles($resource_path)
+    {
+        $resources  = realpath($resource_path);
+        $container  = new ContainerBuilder();
+        $translator = new Definition();
+        $translator->setArguments([[], [], [], [
+            'resource_files' => ['en' => [$resources]]
+        ]]);
+        $container->setDefinition('translator.default', $translator);
+
+        $pass = new EnumTranslationCompilerPass();
+        $pass->process($container);
+
+        $calls = $translator->getMethodCalls();
+
+        $this->assertEquals(1, count($calls));
+        $this->assertEquals(['addResource', ['enum', $resources, 'en', MockEnum::class]], $calls[0]);
+    }
+
+    public function processLoadYamlFilesProvider()
+    {
+        yield [__DIR__ . '/../Mock/Resources/translations/enum.en.yml'];
+        yield [__DIR__ . '/../Mock/Resources/translations/enum.en.yaml'];
+    }
+
     public function testProcess()
     {
         $resources  = realpath(__DIR__ . '/../Mock/Resources/translations/enum.en.yml');

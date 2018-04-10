@@ -61,7 +61,7 @@ class EnumTranslationCompilerPass implements CompilerPassInterface
         foreach ($enum_files as $file) {
             list(, $locale, $format) = explode('.', basename($file), 3);
 
-            if (strtolower($format) !== 'yml') {
+            if (!\in_array(strtolower($format), ['yml', 'yaml'], true)) {
                 throw new \RuntimeException(sprintf("Unsupported enum translation file format '%s'.", $format));
             }
 
