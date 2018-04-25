@@ -1,13 +1,15 @@
 <?php
+/**
+ * @copyright 2014-2018 Hostnet B.V.
+ */
+declare(strict_types=1);
+
 namespace Hostnet\Bundle\EntityTranslationBundle\Loader;
 
 use Symfony\Component\Translation\Loader\LoaderInterface;
 use Symfony\Component\Translation\Loader\YamlFileLoader;
 use Symfony\Component\Translation\MessageCatalogue;
 
-/**
- * @author Yannick de Lange <ydelange@hostnet.nl>
- */
 class EnumLoader implements LoaderInterface
 {
     /**
@@ -49,9 +51,11 @@ class EnumLoader implements LoaderInterface
 
         foreach ($this->getStringConstants($domain) as $const => $value) {
             $key = $this->getPrettyName($domain) . '.' . strtolower($const);
-            if ($translations->has($key)) {
-                $messages[(string)$value] = $translations->get($key);
+            if (!$translations->has($key)) {
+                continue;
             }
+
+            $messages[(string) $value] = $translations->get($key);
         }
 
         $catalogue = new MessageCatalogue($locale);

@@ -1,13 +1,15 @@
 <?php
+/**
+ * @copyright 2014-2018 Hostnet B.V.
+ */
+declare(strict_types=1);
+
 namespace Hostnet\Bundle\EntityTranslationBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Yaml\Yaml;
 
-/**
- * @author Yannick de Lange <ydelange@hostnet.nl>
- */
 class EnumTranslationCompilerPass implements CompilerPassInterface
 {
     /**

@@ -1,14 +1,19 @@
 <?php
+/**
+ * @copyright 2014-2018 Hostnet B.V.
+ */
+declare(strict_types=1);
+
 namespace Hostnet\Bundle\EntityTranslationBundle;
 
 use Hostnet\Bundle\EntityTranslationBundle\DependencyInjection\EnumTranslationCompilerPass;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
  * @covers \Hostnet\Bundle\EntityTranslationBundle\HostnetEntityTranslationBundle
- * @author Yannick de Lange <ydelange@hostnet.nl>
  */
-class HostnetEntityTranslationBundleTest extends \PHPUnit_Framework_TestCase
+class HostnetEntityTranslationBundleTest extends TestCase
 {
     public function testBuild()
     {
