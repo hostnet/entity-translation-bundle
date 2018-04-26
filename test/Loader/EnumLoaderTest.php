@@ -1,15 +1,21 @@
 <?php
+/**
+ * @copyright 2014-2018 Hostnet B.V.
+ */
+declare(strict_types=1);
+
 namespace Hostnet\Bundle\EntityTranslationBundle\Loader;
 
 use Hostnet\Bundle\EntityTranslationBundle\Mock\MockEnum;
 use Hostnet\Bundle\EntityTranslationBundle\MockArray\MockArrayEnum;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Translation\Loader\YamlFileLoader;
 use Symfony\Component\Translation\Translator;
 
 /**
  * @covers \Hostnet\Bundle\EntityTranslationBundle\Loader\EnumLoader
  */
-class EnumLoaderTest extends \PHPUnit_Framework_TestCase
+class EnumLoaderTest extends TestCase
 {
     private $translator;
 

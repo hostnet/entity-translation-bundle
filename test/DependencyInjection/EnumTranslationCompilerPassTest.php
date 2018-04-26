@@ -1,14 +1,20 @@
 <?php
+/**
+ * @copyright 2014-2018 Hostnet B.V.
+ */
+declare(strict_types=1);
+
 namespace Hostnet\Bundle\EntityTranslationBundle\DependencyInjection;
 
 use Hostnet\Bundle\EntityTranslationBundle\Mock\MockEnum;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 
 /**
  * @covers \Hostnet\Bundle\EntityTranslationBundle\DependencyInjection\EnumTranslationCompilerPass
  */
-class EnumTranslationCompilerPassTest extends \PHPUnit_Framework_TestCase
+class EnumTranslationCompilerPassTest extends TestCase
 {
     /**
      * @dataProvider processLoadYamlFilesProvider
@@ -19,7 +25,7 @@ class EnumTranslationCompilerPassTest extends \PHPUnit_Framework_TestCase
         $container  = new ContainerBuilder();
         $translator = new Definition();
         $translator->setArguments([[], [], [], [
-            'resource_files' => ['en' => [$resources]]
+            'resource_files' => ['en' => [$resources]],
         ]]);
         $container->setDefinition('translator.default', $translator);
 
@@ -44,7 +50,7 @@ class EnumTranslationCompilerPassTest extends \PHPUnit_Framework_TestCase
         $container  = new ContainerBuilder();
         $translator = new Definition();
         $translator->setArguments([[], [], [], [
-            'resource_files' => ['en' => [$resources]]
+            'resource_files' => ['en' => [$resources]],
         ]]);
         $container->setDefinition('translator.default', $translator);
 
@@ -66,7 +72,7 @@ class EnumTranslationCompilerPassTest extends \PHPUnit_Framework_TestCase
         $container  = new ContainerBuilder();
         $translator = new Definition();
         $translator->setArguments([[], [], [], [
-            'resource_files' => ['en' => [$resources]]
+            'resource_files' => ['en' => [$resources]],
         ]]);
 
         $container->setDefinition('translator.default', $translator);
@@ -80,7 +86,7 @@ class EnumTranslationCompilerPassTest extends \PHPUnit_Framework_TestCase
         $container  = new ContainerBuilder();
         $translator = new Definition();
         $translator->setArguments([[], [], [], [
-            'resource_files' => ['en' => []]
+            'resource_files' => ['en' => []],
         ]]);
 
         $container->setDefinition('translator.default', $translator);
@@ -102,7 +108,7 @@ class EnumTranslationCompilerPassTest extends \PHPUnit_Framework_TestCase
         $container  = new ContainerBuilder();
         $translator = new Definition();
         $translator->setArguments([[], [], [], [
-            'resource_files' => ['en' => [$resources]]
+            'resource_files' => ['en' => [$resources]],
         ]]);
 
         $container->setDefinition('translator.default', $translator);
