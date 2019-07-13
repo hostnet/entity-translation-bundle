@@ -7,11 +7,13 @@ sudo: false
 #    - "$HOME/.composer/cache/files"
 
 env:
-  - COMPOSER_FLAGS="--prefer-stable"
+  global:
+    - COMPOSER_FLAGS="--prefer-stable"
 
 php:
   - 7.1
   - 7.2
+  - 7.3
   - nightly
 
 matrix:
