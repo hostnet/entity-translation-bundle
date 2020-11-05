@@ -26,7 +26,7 @@ class EnumTranslationCompilerPassTest extends TestCase
         $translator = new Definition();
         $translator->setArguments([[], [], [], [
             'resource_files' => ['en' => [$resources]],
-        ]]);
+        ],]);
         $container->setDefinition('translator.default', $translator);
 
         $pass = new EnumTranslationCompilerPass();
@@ -51,7 +51,7 @@ class EnumTranslationCompilerPassTest extends TestCase
         $translator = new Definition();
         $translator->setArguments([[], [], [], [
             'resource_files' => ['en' => [$resources]],
-        ]]);
+        ],]);
         $container->setDefinition('translator.default', $translator);
 
         $pass = new EnumTranslationCompilerPass();
@@ -73,7 +73,7 @@ class EnumTranslationCompilerPassTest extends TestCase
         $translator = new Definition();
         $translator->setArguments([[], [], [], [
             'resource_files' => ['en' => [$resources]],
-        ]]);
+        ],]);
 
         $container->setDefinition('translator.default', $translator);
 
@@ -87,7 +87,7 @@ class EnumTranslationCompilerPassTest extends TestCase
         $translator = new Definition();
         $translator->setArguments([[], [], [], [
             'resource_files' => ['en' => []],
-        ]]);
+        ],]);
 
         $container->setDefinition('translator.default', $translator);
 
@@ -109,7 +109,7 @@ class EnumTranslationCompilerPassTest extends TestCase
         $translator = new Definition();
         $translator->setArguments([[], [], [], [
             'resource_files' => ['en' => [$resources]],
-        ]]);
+        ],]);
 
         $container->setDefinition('translator.default', $translator);
 
