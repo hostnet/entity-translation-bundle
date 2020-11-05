@@ -15,7 +15,7 @@
         "symfony/yaml":                 "^4.0|^3.0"
     },
     "require-dev": {
-        "hostnet/phpcs-tool": "^6.0.2",
+        "hostnet/phpcs-tool": "^8.3",
         "phpunit/phpunit":    "^7.0",
         "symfony/finder":     "^4.0|^3.0"
     },

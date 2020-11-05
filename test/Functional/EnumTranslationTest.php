@@ -28,7 +28,7 @@ class EnumTranslationTest extends KernelTestCase
      */
     public function testTranslations($object_class, $key, $expected_translation, $locale)
     {
-        /* @var $translator TranslatorInterface */
+        /** @var TranslatorInterface $translator */
         $translator = static::$kernel->getContainer()->get('translator');
 
         self::assertSame($expected_translation, $translator->trans($key, [], $object_class, $locale));
@@ -53,7 +53,7 @@ class EnumTranslationTest extends KernelTestCase
 
     public function testverifyDefaultAppMessages()
     {
-        /* @var $translator TranslatorInterface */
+        /** @var TranslatorInterface $translator */
         $translator = static::$kernel->getContainer()->get('translator');
 
         self::assertSame('correct', $translator->trans('to_verify_the_translations_are_loaded'));
