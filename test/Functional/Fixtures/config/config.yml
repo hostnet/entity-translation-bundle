@@ -1,4 +1,5 @@
 framework:
     secret: test
     translator:
+        default_path: '%kernel.project_dir%/test/Functional/Fixtures/translations'
     test: true

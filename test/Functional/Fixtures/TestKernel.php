@@ -1,4 +1,9 @@
 <?php
+/**
+ * @copyright 2016-present Hostnet B.V.
+ */
+declare(strict_types=1);
+
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\HttpKernel\Kernel;
 
@@ -9,11 +14,11 @@ class TestKernel extends Kernel
      */
     public function registerBundles()
     {
-        return array(
+        return [
             new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
-            new Hostnet\Bundle\EntityTranslationBundle\HostnetEntityTranslationBundle(),
             new Hostnet\Bundle\EntityTranslationBundle\Functional\Fixtures\FooBundle\FooBundle(),
-        );
+            new Hostnet\Bundle\EntityTranslationBundle\HostnetEntityTranslationBundle(),
+        ];
     }
 
     /**
@@ -21,16 +26,16 @@ class TestKernel extends Kernel
      */
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
-        $loader->load(__DIR__.'/config/config.yml');
+        $loader->load(__DIR__ . '/config/config.yml');
     }
 
     public function getCacheDir()
     {
-        return dirname(__DIR__).'/../../var/cache';
+        return dirname(__DIR__) . '/../../var/cache';
     }
 
     public function getLogDir()
     {
-        return dirname(__DIR__).'/../../var/logs';
+        return dirname(__DIR__) . '/../../var/logs';
     }
 }

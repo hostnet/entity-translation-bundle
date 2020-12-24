@@ -19,7 +19,7 @@ class EnumLoaderTest extends TestCase
 {
     private $translator;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $yml_loader = new YamlFileLoader();
         $loader     = new EnumLoader($yml_loader);
@@ -34,27 +34,27 @@ class EnumLoaderTest extends TestCase
         );
     }
 
-    public function testTranslation()
+    public function testTranslation(): void
     {
         $this->assertEquals(
             'Foo',
-            $this->translator->trans(MockEnum::FOO, [], MockEnum::class)
+            $this->translator->trans((string) MockEnum::FOO, [], MockEnum::class)
         );
         $this->assertEquals(
             'Not so Bar',
-            $this->translator->trans(MockEnum::BAR, [], MockEnum::class)
+            $this->translator->trans((string) MockEnum::BAR, [], MockEnum::class)
         );
         $this->assertEquals(
             'foo_bar',
-            $this->translator->trans(MockEnum::FOO_BAR, [], MockEnum::class)
+            $this->translator->trans((string) MockEnum::FOO_BAR, [], MockEnum::class)
         );
         $this->assertEquals(
             '1',
-            $this->translator->trans(MockEnum::FOO)
+            $this->translator->trans((string) MockEnum::FOO)
         );
     }
 
-    public function testTranslationArray()
+    public function testTranslationArray(): void
     {
         $this->translator->addResource(
             'enum',
@@ -65,18 +65,18 @@ class EnumLoaderTest extends TestCase
 
         $this->assertEquals(
             'Foo1',
-            $this->translator->trans(MockArrayEnum::FOO, [], MockArrayEnum::class)
+            $this->translator->trans((string) MockArrayEnum::FOO, [], MockArrayEnum::class)
         );
         $this->assertEquals(
             'Bar2',
-            $this->translator->trans(MockArrayEnum::BAR, [], MockArrayEnum::class)
+            $this->translator->trans((string) MockArrayEnum::BAR, [], MockArrayEnum::class)
         );
     }
 
     /**
      * @expectedException \RuntimeException
      */
-    public function testNonEnumLoad()
+    public function testNonEnumLoad(): void
     {
         $yml_loader = new YamlFileLoader();
         $loader     = new EnumLoader($yml_loader);
@@ -89,6 +89,6 @@ class EnumLoaderTest extends TestCase
             'en',
             'phpunit'
         );
-        $translator->trans(0, [], 'phpunit');
+        $translator->trans((string) 0, [], 'phpunit');
     }
 }

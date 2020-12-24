@@ -9,7 +9,7 @@ namespace Hostnet\Bundle\EntityTranslationBundle\Functional;
 use Hostnet\Bundle\EntityTranslationBundle\Functional\Fixtures\Enum\PostStatus;
 use Hostnet\Bundle\EntityTranslationBundle\Functional\Fixtures\Enum\ReplyStatus;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * Tests if the FooBundle enum translations and app translations can be loaded.
@@ -18,7 +18,7 @@ use Symfony\Component\Translation\TranslatorInterface;
  */
 class EnumTranslationTest extends KernelTestCase
 {
-    protected function setUp()
+    protected function setUp(): void
     {
         static::bootKernel();
     }
@@ -26,15 +26,14 @@ class EnumTranslationTest extends KernelTestCase
     /**
      * @dataProvider translationProvider
      */
-    public function testTranslations($object_class, $key, $expected_translation, $locale)
+    public function testTranslations($object_class, $key, $expected_translation, $locale): void
     {
         /** @var TranslatorInterface $translator */
         $translator = static::$kernel->getContainer()->get('translator');
-
         self::assertSame($expected_translation, $translator->trans($key, [], $object_class, $locale));
     }
 
-    public static function translationProvider()
+    public static function translationProvider(): iterable
     {
         return [
             [PostStatus::class, PostStatus::AWAITING_APPROVAL, 'I am awaiting approval', 'en'],
@@ -45,13 +44,13 @@ class EnumTranslationTest extends KernelTestCase
             [PostStatus::class, PostStatus::VISIBLE, 'Ik ben zichtbaar', 'nl'],
             [PostStatus::class, PostStatus::HIDDEN, 'Hidden (vendor file)', 'en'],
             [PostStatus::class, 'henk', 'henk', 'en'],
-            [null, 'henk', 'henk', 'nl'],
-            [ReplyStatus::class, ReplyStatus::CLOSED, 'closed', 'en'],
-            [ReplyStatus::class, ReplyStatus::OPEN, 'open', 'en'],
+            [(string) null, 'henk', 'henk', 'nl'],
+            [ReplyStatus::class, (string) ReplyStatus::CLOSED, 'closed', 'en'],
+            [ReplyStatus::class, (string) ReplyStatus::OPEN, 'open', 'en'],
         ];
     }
 
-    public function testverifyDefaultAppMessages()
+    public function testverifyDefaultAppMessages(): void
     {
         /** @var TranslatorInterface $translator */
         $translator = static::$kernel->getContainer()->get('translator');
