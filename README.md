@@ -14,7 +14,7 @@ Or in a twig template:
 
 Requirements
 ------------
-The entity translation bundle requires at least php 5.4 and the symfony translation component. For specific requirements, please check [composer.json](../master/composer.json)
+The entity translation bundle requires at least php 7.3 and the symfony translation component. For specific requirements, please check [composer.json](../master/composer.json)
 
 Installation
 ------------
