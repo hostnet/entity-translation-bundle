@@ -73,9 +73,6 @@ class EnumLoaderTest extends TestCase
         );
     }
 
-    /**
-     * @expectedException \RuntimeException
-     */
     public function testNonEnumLoad(): void
     {
         $yml_loader = new YamlFileLoader();
@@ -89,6 +86,9 @@ class EnumLoaderTest extends TestCase
             'en',
             'phpunit'
         );
+
+        $this->expectException(\RuntimeException::class);
+
         $translator->trans((string) 0, [], 'phpunit');
     }
 }
