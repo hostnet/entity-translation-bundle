@@ -63,9 +63,6 @@ class EnumTranslationCompilerPassTest extends TestCase
         $this->assertEquals(['addResource', ['enum', $resources, 'en', MockEnum::class]], $calls[0]);
     }
 
-    /**
-     * @expectedException \RuntimeException
-     */
     public function testProcessNotYml()
     {
         $resources  = realpath(__DIR__ . '/../MockXml/Resources/translations/enum.en.xml');
@@ -78,6 +75,8 @@ class EnumTranslationCompilerPassTest extends TestCase
         $container->setDefinition('translator.default', $translator);
 
         $pass = new EnumTranslationCompilerPass();
+
+        $this->expectException(\RuntimeException::class);
         $pass->process($container);
     }
 
@@ -99,9 +98,6 @@ class EnumTranslationCompilerPassTest extends TestCase
         $this->assertEquals(0, count($calls));
     }
 
-    /**
-     * @expectedException \RuntimeException
-     */
     public function testProcessNoArray()
     {
         $resources  = realpath(__DIR__ . '/../MockNoArray/Resources/translations/enum.en.yml');
@@ -114,6 +110,8 @@ class EnumTranslationCompilerPassTest extends TestCase
         $container->setDefinition('translator.default', $translator);
 
         $pass = new EnumTranslationCompilerPass();
+
+        $this->expectException(\RuntimeException::class);
         $pass->process($container);
     }
 }
