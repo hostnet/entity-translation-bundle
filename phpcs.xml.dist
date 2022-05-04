@@ -2,5 +2,5 @@
 <ruleset name="entity-translation-bundle">
     <exclude-pattern>test/Functional/Fixtures/cache/</exclude-pattern>
     <exclude-pattern>test/Functional/Fixtures/TestKernel.php</exclude-pattern>
-    <rule ref="Hostnet" />
+    <rule ref="Hostnet-Level-1" />
 </ruleset>

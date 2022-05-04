@@ -78,7 +78,7 @@ class EnumTranslationCompilerPass implements CompilerPassInterface
 
             // convert the flatten keys into a list of enum classes.
             $enums = array_unique(array_map(function ($str) {
-                $parts = explode(".", $str);
+                $parts = explode('.', $str);
                 array_pop($parts);
 
                 return preg_replace_callback(
@@ -86,7 +86,7 @@ class EnumTranslationCompilerPass implements CompilerPassInterface
                     function ($matches) {
                         return strtoupper($matches[1]);
                     },
-                    implode("\\", array_map('ucfirst', $parts))
+                    implode('\\', array_map('ucfirst', $parts))
                 );
             }, array_keys($this->flattenKeys($translations))));
 
