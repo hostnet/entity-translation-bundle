@@ -19,7 +19,7 @@ class EnumTranslationCompilerPassTest extends TestCase
     /**
      * @dataProvider processLoadYamlFilesProvider
      */
-    public function testProcessLoadYamlFiles($resource_path)
+    public function testProcessLoadYamlFiles($resource_path): void
     {
         $resources  = realpath($resource_path);
         $container  = new ContainerBuilder();
@@ -44,7 +44,7 @@ class EnumTranslationCompilerPassTest extends TestCase
         yield [__DIR__ . '/../Mock/Resources/translations/enum.en.yaml'];
     }
 
-    public function testProcess()
+    public function testProcess(): void
     {
         $resources  = realpath(__DIR__ . '/../Mock/Resources/translations/enum.en.yml');
         $container  = new ContainerBuilder();
@@ -63,7 +63,7 @@ class EnumTranslationCompilerPassTest extends TestCase
         $this->assertEquals(['addResource', ['enum', $resources, 'en', MockEnum::class]], $calls[0]);
     }
 
-    public function testProcessNotYml()
+    public function testProcessNotYml(): void
     {
         $resources  = realpath(__DIR__ . '/../MockXml/Resources/translations/enum.en.xml');
         $container  = new ContainerBuilder();
@@ -80,7 +80,7 @@ class EnumTranslationCompilerPassTest extends TestCase
         $pass->process($container);
     }
 
-    public function testProcessNoTrans()
+    public function testProcessNoTrans(): void
     {
         $container  = new ContainerBuilder();
         $translator = new Definition();
@@ -98,7 +98,7 @@ class EnumTranslationCompilerPassTest extends TestCase
         $this->assertEquals(0, count($calls));
     }
 
-    public function testProcessNoArray()
+    public function testProcessNoArray(): void
     {
         $resources  = realpath(__DIR__ . '/../MockNoArray/Resources/translations/enum.en.yml');
         $container  = new ContainerBuilder();

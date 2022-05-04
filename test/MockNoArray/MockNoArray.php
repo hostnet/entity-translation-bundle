@@ -8,7 +8,7 @@ namespace Hostnet\Bundle\EntityTranslationBundle\MockNoArray;
 
 class MockNoArray
 {
-    const FOO     = 1;
-    const BAR     = 2;
-    const FOO_BAR = 3;
+    public const FOO     = 1;
+    public const BAR     = 2;
+    public const FOO_BAR = 3;
 }
