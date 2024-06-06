@@ -35,7 +35,7 @@ class EnumLoader implements LoaderInterface
     /**
      * {@inheritdoc}
      */
-    public function load($resource, $locale, $domain = 'messages')
+    public function load($resource, $locale, $domain = 'messages'): MessageCatalogue
     {
         if (!class_exists($domain)) {
             throw new \RuntimeException(sprintf("Could not load constants for a class '%s'.", $domain));
